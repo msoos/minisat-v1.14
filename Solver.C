@@ -239,7 +239,7 @@ void Solver::cancelUntil(int level) {
 void Solver::analyze(Clause* _confl, vec<Lit>& out_learnt, int& out_btlevel)
 {
     GClause confl = GClause_new(_confl);
-    vec<char>&     seen  = analyze_seen;
+    vec<int8_t>&   seen  = analyze_seen;
     int            pathC = 0;
     Lit            p     = lit_Undef;
 
@@ -371,7 +371,7 @@ void Solver::analyzeFinal(Clause* confl, bool skip_first)
     conflict.clear();
     if (root_level == 0) return;
 
-    vec<char>&     seen  = analyze_seen;
+    vec<int8_t>& seen = analyze_seen;
     for (int i = skip_first ? 1 : 0; i < confl->size(); i++){
         Var     x = var((*confl)[i]);
         if (level[x] > 0)
